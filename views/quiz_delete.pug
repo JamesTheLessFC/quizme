@@ -1,0 +1,12 @@
+extends layout
+
+block content
+    div.container.mt-5
+        div.row
+          div.col-12
+            h1.text-danger.text-center.font-weight-light Warning!
+            h3.text-center.font-weight-light.mb-5 Deleting a quiz cannot be undone. Are you sure you'd like to proceed?
+        form.text-center(method='POST' action='')
+            button.btn.btn-danger(type='submit') Delete Quiz
+            span  
+            a.btn.btn-primary(role="button" href=quiz.details_url) Go Back To Quiz Page

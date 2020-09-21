@@ -1,0 +1,33 @@
+extends layout
+
+block content
+    div.row.mb-5
+        div.category-background.col-12.col-lg-4(style=(title==="Animals" ? "background-image:url('../../images/animals.jpg')" : title==="Art" ? "background-image:url('../../images/art.jpg')" : title==="Dating" ? "background-image:url('../../images/dating.jpg')" : title==="Fun" ? "background-image:url('../../images/fun.jpg')" : title==="Geography" ? "background-image:url('../../images/geography.jpg')" : title==="History" ? "background-image:url('../../images/history.jpg')" : title==="Language" ? "background-image:url('../../images/language.jpg')" : title==="Literature" ? "background-image:url('../../images/literature.jpg')" : title==="Movies" ? "background-image:url('../../images/movies.jpg')" : title==="Music" ? "background-image:url('../../images/music.jpg')" : title==="Technology" ? "background-image:url('../../images/technology.jpg')" : title==="Religion" ? "background-image:url('../../images/religion.jpg')" : title==="Science" ? "background-image:url('../../images/science.jpg')" : title==="Sports" ? "background-image:url('../../images/sports.jpg')" : "background-image:url('../../images/other.jpg')"))
+        div.col-12.col-lg-8.bg-dark.text-white.py-5
+            h1.display-4.text-center Category: 
+                span.text-warning.font-weight-bold #{title}
+            p.lead.text-center Choose a quiz below...
+    div.container
+        div.row.row-cols-1.row-cols-lg-3.justify-content-center
+            each quiz in quiz_list
+                div.col-12.col-lg-4.mb-4
+                    div.card.h-100
+                        h4.card-header.card-title.font-weight-light.bg-dark.text-center.text-white #{quiz.name}
+                        div.card-body.text-center
+                            p.card-text.text-muted #{quiz.description}
+                            a.btn.btn-warning.select-quiz(role="button" href=quiz.start_url) Start Quiz!
+                        div.card-footer
+                            p.text-center.text-muted
+                                span(class=(quiz.difficulty==="Easy" ? "text-success" : quiz.difficulty==="Moderate" ? "text-primary" : "text-danger")) #{quiz.difficulty} 
+                                span.text-nowrap | #{quiz.number_of_questions} Questions |  
+                                span.text-nowrap Likes: 
+                                    span.badge.badge-primary.badge-pill #{quiz.likes} 
+                            p.text-center.text-muted.small By 
+                                u #{quiz.author}
+                                span  | 
+                                em Updated #{quiz.date_created_formatted} 
+                                a.badge.badge-secondary(href=quiz.details_url) Update Quiz
+            else
+                div.col-12.text-center
+                    h1.font-weight-light Oops!
+                    p There are currently no quizzes in this category.

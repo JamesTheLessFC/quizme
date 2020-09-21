@@ -1,0 +1,33 @@
+extends layout
+
+block content
+    div.row.mb-5
+        div.category-background.col-12.col-md-4(style="background-image:url('../../../images/search.jpg')")
+        div.col-12.col-md-8.bg-dark.text-white.py-5
+            h1.display-4.text-center Quiz 
+                span.text-warning.font-weight-bold Search
+            p.lead.text-center Choose a quiz below...
+    div.container
+        div.row.row-cols-1.row-cols-md-3.justify-content-center
+            each quiz in quiz_list
+                div.col-12.col-md-4.mb-4
+                    div.card.h-100
+                        h4.card-header.card-title.font-weight-light.bg-dark.text-center.text-white #{quiz.name}
+                        div.card-body.text-center
+                            p.card-text.text-muted #{quiz.description}
+                            a.btn.btn-warning.select-quiz(role="button" href=quiz.start_url) Start Quiz!
+                        div.card-footer
+                            p.text-center.text-muted
+                                span(class=(quiz.difficulty==="Easy" ? "text-success" : quiz.difficulty==="Moderate" ? "text-primary" : "text-danger")) #{quiz.difficulty} 
+                                span.text-nowrap | #{quiz.number_of_questions} Questions |  
+                                span.text-nowrap Likes: 
+                                    span.badge.badge-primary.badge-pill #{quiz.likes} 
+                            p.text-center.text-muted.small By 
+                                u #{quiz.author}
+                                span  | 
+                                em Updated #{quiz.date_created_formatted} 
+                                a.badge.badge-secondary(href=quiz.details_url) Update Quiz
+            else
+                div.col-12.text-center
+                    h1.font-weight-light Sorry!
+                    p There are no quizzes matching this search.

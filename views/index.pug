@@ -1,0 +1,129 @@
+extends layout
+
+block content
+  div.row.mb-5
+    div.category-background.col-12.col-md-4(style="background-image:url('/images/study-group.jpg')")
+    div.col-12.col-md-8.bg-dark.text-white.py-5
+      h1.display-3.text-center.font-weight-lighter.mx-3 Welcome to 
+        span.text-warning.font-weight-bold QuizMe
+      p.lead.text-center.text-light.py-4 A fun web app for 
+        span.font-weight-bold.text-nowrap quiz-takers 
+        span and 
+        span.font-weight-bold.text-nowrap quiz-makers
+
+  div.container
+    div.row.justify-content-center
+      div.col-12.col-md-9.col-xl-5
+        h1.text-center Do you love quizzes?
+        h2.text-center.font-weight-light.mb-4
+          span This app was designed 
+          span.text-nowrap to help you:
+        ul
+          li
+            h3 
+              span.bg-warning Find quizzes
+              span.font-weight-light  that match your interests and knowledge level
+          li
+            h3
+              span.bg-warning Create quizzes
+              span.font-weight-light  to use as study/teaching aides, as challenges for family and friends, or just for fun!
+          li
+            h3
+              span.bg-warning Update quizzes
+              span.font-weight-light  with new questions and information after creation
+
+      div.col-12.col-md-9.col-xl-7.d-none.d-md-block.my-5.mt-xl-0
+        h3.font-weight-light.text-center.bg-warning.text-dark.mb-0.py-2 Featured Quizzes
+        div#carouselExampleCaptions.carousel.slide(data-ride="carousel")
+          div.carousel-inner
+            div.carousel-item.active
+              img.d-block.w-100(src="/images/history.jpg")
+              div.carousel-caption.bg-dark.rounded
+                h4.text-warning.pb-1 American Presidents 
+                  span.font-weight-light.text-white.text-nowrap By 
+                    u JFCiskanik
+                a.btn.btn-warning.text-dark(href="/content/quiz/5f5af43fb0ed29436ad5528f/start") Start Quiz!
+            div.carousel-item
+              img.d-block.w-100(src="/images/science.jpg")
+              div.carousel-caption.bg-dark.rounded
+                h4.text-warning.pb-1 Our Solar System 
+                  span.font-weight-light.text-white.text-nowrap By 
+                    u JFCiskanik
+                a.btn.btn-warning.text-dark(href="/content/quiz/5f617928df80a8621511d82e/start") Start Quiz!
+            div.carousel-item
+              img.d-block.w-100(src="/images/animals.jpg")
+              div.carousel-caption.bg-dark.rounded
+                h4.text-warning.pb-1 Big Cats 
+                  span.font-weight-light.text-white.text-nowrap By 
+                    u JFCiskanik
+                a.btn.btn-warning.text-dark(href="/content/quiz/5f617bf9df80a8621511d832/start") Start Quiz!
+          a.carousel-control-prev(href="#carouselExampleCaptions" role="button" data-slide="prev")
+            span.carousel-control-prev-icon(aria-hidden="true")
+            span.sr-only Previous
+          a.carousel-control-next(href="#carouselExampleCaptions" role="button" data-slide="next")
+            span.carousel-control-next-icon(aria-hidden="true")
+            span.sr-only Next
+  div.row
+    div.container-fluid.d-md-none
+      h1.font-weight-light.text-center.bg-warning.text-dark.py-4.my-3 Featured Quizzes
+    div.container.text-center
+      div.col-12.my-4.d-md-none
+        img.w-100(src="/images/history.jpg")
+        div.bg-dark.text-center.p-4
+          h4.text-warning.pb-3 American Presidents 
+            span.font-weight-light.text-white.text-nowrap By 
+              u JFCiskanik
+          a.btn.btn-lg.btn-warning.text-dark(href="/content/quiz/5f5af43fb0ed29436ad5528f/start") Start Quiz!
+      div.col-12.my-4.d-md-none
+        img.w-100(src="/images/science.jpg")
+        div.bg-dark.text-center.p-4
+          h4.text-warning.pb-3 Our Solar System 
+            span.font-weight-light.text-white.text-nowrap By 
+              u JFCiskanik
+          a.btn.btn-lg.btn-warning.text-dark(href="/content/quiz/5f617928df80a8621511d82e/start") Start Quiz!
+      div.col-12.my-4.d-md-none
+        img.w-100(src="/images/animals.jpg")
+        div.bg-dark.text-center.p-4
+          h4.text-warning.pb-3 Big Cats 
+            span.font-weight-light.text-white.text-nowrap By 
+              u JFCiskanik
+          a.btn.btn-lg.btn-warning.text-dark(href="/content/quiz/5f617bf9df80a8621511d832/start") Start Quiz!
+
+  div.container-fluid.bg-light.py-5.mb-5
+    div.container
+      div.row.justify-content-center
+        div.col-12.mb-4
+          h1.text-center.font-weight-light.font-italic.text-muted ...Ready to get started?
+        div.col-12.col-md-5.bg-dark.rounded.mr-md-4.mb-4.p-4
+          h5.display-4.text-warning.text-center Quiz Takers
+          hr.bg-warning
+          p.text-white Select a category from the menu below and click the 'Explore Quizzes' button. You will then be redirected to the category's page, where you can choose a quiz. Good luck!
+          form(method='POST' action='')
+            div.form-group
+              select.category-select.form-control(name="category-select" required='required')
+                option(disabled='disabled' selected='selected') Select Category
+                option(value="Animals") Animals
+                option(value="Animals") Art
+                option(value="Animals") Dating
+                option(value="Animals") Fun
+                option(value="Geography") Geography
+                option(value="History") History
+                option(value="Language") Language
+                option(value="Literature") Literature
+                option(value="Movies") Movies
+                option(value="Music") Music
+                option(value="Other") Other
+                option(value="Religion") Religion
+                option(value="Science") Science
+                option(value="Technology") Technology
+            br
+            div.text-center
+              a.explore-quizzes-button.btn.btn-warning.btn-lg.disabled(role="button" href="#") Explore Quizzes
+        div.col-12.col-md-5.bg-dark.rounded.mb-4.p-4
+          h5.display-4.text-warning.text-center Quiz Makers
+          hr.bg-warning
+          p.text-white To create a quiz, click the 'Create Quiz' button below. You will then be redirected to a quiz-create form. Once this form is successfully submitted, you will be able to add questions and update your quiz as needed, via your quiz page. Keep in mind that all questions are in multiple-choice format. 
+          p.text-warning.text-center.font-italic Thank you for contributing!
+          div.text-center
+            a.btn.btn-lg.btn-warning.text-dark(href="/content/quiz/create") Create Quiz
+

@@ -1,0 +1,66 @@
+extends layout
+
+block content
+    div.row.mb-5
+        div.category-background.col-12.col-md-4(style=("background-image:url('../../../images/study-group.jpg')"))
+        div.col-12.col-md-8.bg-dark.text-white.text-center.py-5
+            h1.display-5.font-weight-bold.text-center #{quiz.name} 
+            h2.font-weight-light.text-muted.text-center By #{quiz.author}
+            p.text-center.mt-5.px-5
+                strong.text-warning Category: 
+                | #{quiz.category}
+                span.text-muted  | 
+                strong.text-warning Difficulty: 
+                | #{quiz.difficulty}
+            a.btn.btn-warning.btn-lg(role="button" href=quiz.start_url) Start Quiz!
+    - currentPage = "/content/quiz/" + quiz._id + "/details"
+    div.container.my-5.text-center
+        table.table.table-striped
+            thead.thead-dark
+                tr
+                    th.text-center(scope="row" colspan="2") QUIZ DETAILS
+            tbody
+                tr
+                    th(scope="row") Name
+                    td #{quiz.name}
+                tr
+                    th(scope="row") Category
+                    td #{quiz.category}
+                tr
+                    th(scope="row") Difficulty
+                    td #{quiz.difficulty}
+                tr
+                    th(scope="row") Description
+                    td #{quiz.description}
+                tr
+                    th(scope="row") Number of Questions
+                    td #{quiz.number_of_questions}
+                tr
+                    th(scope="row") Likes
+                    td #{quiz.likes}
+                tr
+                    th(scope="row") Author
+                    td #{quiz.author}
+                tr
+                    th(scope="row") Last Update
+                    td #{quiz.date_created_formatted}
+        a.btn.btn-secondary(role="button" href=currentPage + "/update") Edit Quiz Details
+        span  
+        a.btn.btn-danger(role="button" href=currentPage + "/delete") Delete Quiz
+        br
+        br
+        hr
+        br
+        table.table.table-striped
+            thead.thead-dark
+                tr
+                    th.text-center(scope="row" colspan="3") QUIZ QUESTIONS
+            tbody
+                each question, index in quiz.questions
+                    - var url = currentPage + "/editquestion/" + index
+                    tr
+                        th(scope="row") #{index + 1}
+                        td #{question}
+                        td
+                            a.btn.btn-secondary.btn-sm(role="button" href=url) Edit Question
+        a.btn.btn-secondary(role="button" href=currentPage + "/addquestion") Add Question

@@ -1,0 +1,79 @@
+extends layout
+
+block content
+  if quiz.questions.length===0
+    div.quiz-container.container.quiz-background.my-sm-5
+        div.row
+          div.col-12
+            h1.question.text-center.font-weight-light.my-4.my-sm-5 Oops!
+            h3.text-center This quiz doesn't have any questions yet.
+        div.row.text-center
+          div.col
+            a.btn.btn-primary.btn-lg.my-5(role="button" href="/") Try another quiz
+  else
+    - for (let i = 0; i < quiz.questions.length; i++)
+      - 
+        const getRandomChoices = () => {
+          const choices = [0, 1, 2, 3];
+          const randomChoices = [];
+          for (let i = 0; i < choices.length; i++) {
+            let index = Math.floor(Math.random() * choices.length);
+            if (randomChoices.includes(choices[index])) {
+              i--;
+            } else {
+              randomChoices.push(choices[index]);
+            }
+          }
+          return randomChoices;
+        }
+      - const choices = getRandomChoices();
+      div.quiz-container.container.quiz-background.my-sm-5.hidden.rounded
+          div.row
+            div.col-12.text-center
+              h1.question.font-weight-light.mt-4.mt-sm-5 #{quiz.questions[i]}
+              button.hint-button.btn.btn-primary.mt-3.mb-5 Give Me a Hint
+              h4.hint.mb-5.hidden.font-weight-light.text-primary.font-italic
+                if quiz.hints[i].length > 0
+                  strong Hint:
+                  span  #{quiz.hints[i]}
+                else
+                  span Sorry! This question doesn't have a hint.
+          div.answers.row
+            if quiz.answers[i][choices[0]]===quiz.correct_answers[i]  
+              h4#answer0.col-12.answer.odd-answer.py-3.correct-answer.my-0 #{quiz.answers[i][choices[0]]}
+              h4.col-12.text-center.bg-success.text-white.hidden.correct-response.my-0 Correct!
+            else
+              h4#answer0.col-12.answer.odd-answer.py-3.incorrect-answer.my-0 #{quiz.answers[i][choices[0]]}
+              h4.col-12.text-center.bg-danger.text-white.hidden.incorrect-response.my-0 Nope!
+            if quiz.answers[i][choices[1]]===quiz.correct_answers[i]
+              h4#answer1.col-12.answer.even-answer.py-3.correct-answer.my-0 #{quiz.answers[i][choices[1]]}
+              h4.col-12.text-center.bg-success.text-white.hidden.correct-response.my-0 Correct!
+            else
+              h4#answer1.col-12.answer.even-answer.py-3.incorrect-answer.my-0 #{quiz.answers[i][choices[1]]}
+              h4.col-12.text-center.bg-danger.text-white.hidden.incorrect-response.my-0 Nope!
+            if quiz.answers[i][choices[2]]===quiz.correct_answers[i]  
+              h4#answer0.col-12.answer.odd-answer.py-3.correct-answer.my-0 #{quiz.answers[i][choices[2]]}
+              h4.col-12.text-center.bg-success.text-white.hidden.correct-response.my-0 Correct!
+            else
+              h4#answer0.col-12.answer.odd-answer.py-3.incorrect-answer.my-0 #{quiz.answers[i][choices[2]]}
+              h4.col-12.text-center.bg-danger.text-white.hidden.incorrect-response.my-0 Nope!
+            if quiz.answers[i][choices[3]]===quiz.correct_answers[i]
+              h4#answer1.col-12.answer.even-answer.py-3.correct-answer.my-0 #{quiz.answers[i][choices[3]]}
+              h4.col-12.text-center.bg-success.text-white.hidden.correct-response.my-0 Correct!
+            else
+              h4#answer1.col-12.answer.even-answer.py-3.incorrect-answer.my-0 #{quiz.answers[i][choices[3]]}
+              h4.col-12.text-center.bg-danger.text-white.hidden.incorrect-response.my-0 Nope!
+          div.row.text-center
+            div.col
+              button.next.btn.btn-primary.btn-lg.my-5(type="button" disabled="disabled") Next
+    div.quiz-container.scorecard.container.quiz-background.my-sm-5.hidden
+      div.row
+        div.col-12
+          h1.question.text-center.font-weight-light.my-4.my-sm-5
+          p.like-message.text-center Did you enjoy this quiz? If so, please click the 'Like' button!
+          form.text-center(method='POST' action='')
+            button.like-quiz.btn.btn-primary.btn-sm(type='submit') Like This Quiz 
+              span.quiz-likes.badge.badge-light #{quiz.likes}
+      div.row.text-center
+        div.col
+          a.btn.btn-warning.btn-lg.my-5(role="button" href="/") Try another quiz

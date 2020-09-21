@@ -1,0 +1,87 @@
+extends layout
+
+block content
+    div.row.mb-5
+        if page==="Create"
+            div.category-background.col-12.col-md-4(style=("background-image:url('../../images/create.jpg')"))
+            div.col-12.col-md-8.bg-dark.text-white.py-5
+                h1.display-4.font-weight-bold.text-center.text-warning Create 
+                    span.font-weight-light.text-white.text-nowrap Your Quiz
+                p.text-center.mt-5.px-5
+                    strong.text-warning Step 1: 
+                    | Fill out the form below. 
+                    em Be sure to fill out each field!
+                p.text-center.px-5
+                    strong.text-warning Step 2: 
+                    | Once complete, click the 'Submit Quiz' button.
+                p.text-center.px-5
+                    strong.text-warning Step 3: 
+                    | You will be directed to your new Quiz page, where you can add/modify questions.
+        else
+            div.category-background.col-12.col-md-4(style=("background-image:url('../../../../images/update.jpg')"))
+            div.col-12.col-md-8.bg-dark.text-white.py-5
+                h1.display-4.font-weight-bold.text-center.text-warning Update 
+                    span.font-weight-light.text-white.text-nowrap Quiz
+                h4.text-muted.text-center.font-weight-light #{quiz_name} | 
+                    em #{quiz_author}
+                p.text-center.mt-5.px-5
+                    strong.text-warning Step 1: 
+                    | Look over the form below and update the fields you'd like to modify.
+                p.text-center.px-5
+                    strong.text-warning Step 2: 
+                    | Click the 'Submit Updates' button. 
+                    em Once clicked, changes cannot be undone!
+                p.text-center.px-5
+                    strong.text-warning Step 3: 
+                    | If the updates were successful, you will be directed back to your updated Quiz page.
+    div.container
+        h1.text-center.font-weight-light.mb-5 Quiz Details
+
+        if errors 
+            ul
+                for error in errors
+                    li.text-danger!= error.msg
+
+        form(method='POST' action='')
+            div.form-group
+                label(for="name") Quiz Name
+                input#name.form-control(type="text" name="name" required='required' placeholder="Enter a name for your quiz (up to 100 characters)" value=(undefined===quiz ? '' : quiz.name))
+            div.form-group
+                label(for="category") Quiz Category
+                select#category.form-control(name="category" required='required')
+                    option(disabled='disabled' selected=(undefined===quiz ? 'selected' : false)) Select Category
+                    option(value="Animals" selected=(undefined===quiz ? false : quiz.category==="Animals" ? "selected" : false)) Animals
+                    option(value="Art" selected=(undefined===quiz ? false : quiz.category==="Art" ? "selected" : false)) Art
+                    option(value="Dating" selected=(undefined===quiz ? false : quiz.category==="Dating" ? "selected" : false)) Dating
+                    option(value="Fun" selected=(undefined===quiz ? false : quiz.category==="Fun" ? "selected" : false)) Fun
+                    option(value="Geography" selected=(undefined===quiz ? false : quiz.category==="Geography" ? "selected" : false)) Geography
+                    option(value="History" selected=(undefined===quiz ? false : quiz.category==="History" ? "selected" : false)) History
+                    option(value="Language" selected=(undefined===quiz ? false : quiz.category==="Language" ? "selected" : false)) Language
+                    option(value="Literature" selected=(undefined===quiz ? false : quiz.category==="Literature" ? "selected" : false)) Literature
+                    option(value="Movies" selected=(undefined===quiz ? false : quiz.category==="Movies" ? "selected" : false)) Movies
+                    option(value="Music" selected=(undefined===quiz ? false : quiz.category==="Music" ? "selected" : false)) Music
+                    option(value="Other" selected=(undefined===quiz ? false : quiz.category==="Other" ? "selected" : false)) Other
+                    option(value="Religion" selected=(undefined===quiz ? false : quiz.category==="Religion" ? "selected" : false)) Religion
+                    option(value="Science" selected=(undefined===quiz ? false : quiz.category==="Science" ? "selected" : false)) Science
+                    option(value="Sports" selected=(undefined===quiz ? false : quiz.category==="Sports" ? "selected" : false)) Sports
+                    option(value="Technology" selected=(undefined===quiz ? false : quiz.category==="Technology" ? "selected" : false)) Technology
+            div.form-group
+                label(for="difficulty") Quiz Difficulty
+                select#difficulty.form-control(name="difficulty" required='required')
+                    option(disabled='disabled' selected='selected') Select Difficulty
+                    option(value="Easy" selected=(undefined===quiz ? false : quiz.difficulty==="Easy" ? "selected" : false)) Easy
+                    option(value="Moderate" selected=(undefined===quiz ? false : quiz.difficulty==="Moderate" ? "selected" : false)) Moderate
+                    option(value="Hard" selected=(undefined===quiz ? false : quiz.difficulty==="Hard" ? "selected" : false)) Hard
+            div.form-group
+                label(for="description") Quiz Description/Tagline
+                textarea#description.form-control(rows="2" placeholder="Enter a brief description of your quiz (up to 200 characters)" name="description") #{undefined===quiz ? '' : quiz.description}
+            div.form-group
+                label(for="author") Quiz Author
+                input#name.form-control(type="text" name="author" required='required' placeholder="Enter an author name for your quiz (up to 30 characters)" value=(undefined===quiz ? '' : quiz.author))
+            br
+            if page==="Create"
+                div.text-center.mb-5
+                    button#submit-quiz.btn.btn-warning(type='submit') Submit Quiz Details
+            else
+                div.text-center.mb-5
+                    button#submit-quiz.btn.btn-warning(type='submit') Submit Updates

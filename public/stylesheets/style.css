@@ -1,0 +1,42 @@
+.hidden {
+  display: none;
+}
+
+.quiz-background {
+  background-color: WhiteSmoke;
+}
+
+.odd-answer {
+  background-color: #d9d9d9;
+}
+
+.even-answer {
+  background-color: #e6e6e6;
+}
+
+.answer {
+  font-weight: normal;
+}
+
+.targeted {
+  background-color: #ffc107;
+  cursor: pointer;
+  padding-left: 1.5rem;
+  font-weight: bold;
+  transition: padding-left 1s;
+}
+
+.correct {
+  background-color: LightGreen;
+}
+
+.incorrect {
+  background-color: LightCoral;
+}
+
+.category-background {
+  min-height: 15rem;
+  background-position: center;
+  background-repeat: no-repeat; 
+  background-size: cover;
+}
